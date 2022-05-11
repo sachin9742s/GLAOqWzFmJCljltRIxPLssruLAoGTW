@@ -1,53 +1,55 @@
-import re
-import os
+import re, os
 from os import environ
-
+from translation import Rocky_autofilter_Robot
 id_pattern = re.compile(r'^.\d+$')
+def is_enabled(value, default):
+    if value.lower() in ["true", "yes", "1", "enable", "on"]:
+        return True
+    elif value.lower() in ["false", "no", "0", "disable", "off"]:
+        return False
+    else:
+        return default
 
-# Bot information
-SESSION = environ.get('SESSION', 'Rocky_autofilter_Robot')
-API_ID = int(environ['API_ID'])
-API_HASH = environ['API_HASH']
-BOT_TOKEN = environ['BOT_TOKEN']
-
-# Bot settings
-CACHE_TIME = int(environ.get('CACHE_TIME', 300))
-USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', False))
-
-BROADCAST_CHANNEL = int(os.environ.get("BROADCAST_CHANNEL", ""))
-ADMIN_ID = set(int(x) for x in os.environ.get("ADMIN_ID", "").split())
-DB_URL = os.environ.get("DATABASE_1", "")
-BROADCAST_AS_COPY = bool(os.environ.get("BROADCAST", True))
-
-# Admins, Channels & Users
+# ==================================
+API_ID = int(environ["API_ID"])
+API_HASH = environ["API_HASH"]
+B_KEYS = environ["BOT_TOKEN"]
+START_MSG = environ.get("START_MSG", Rocky_autofilter_Robot.DEFAULT_MSG)
+BOT_PICS = (environ.get('PICS', 'https://te.legra.ph/file/b181e05df785a59803545.jpg')).split()
+SUPPORT = environ.get("SUPPORT", "t.me/Kiccharequest")
+SPELL_MODE = is_enabled((environ.get('SPELL_MODE', "on")), True)
+SET_SPEL_M = environ.get("SPELL_MODE_TEXT", Rocky_autofilter_Robot.SPELL_CHECK)
+LOG_CHANNEL = int(environ.get("LOG_CHANNEL", None))
+DATABASE_URI = environ.get("DATABASE_URI", None)
+FORCE = environ.get('FORCES_SUB')
+CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", Rocky_autofilter_Robot.FILE_CAPTIONS)
+DEV_NAME = environ.get("DEV_NAME", "Muhammed")
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ['ADMINS'].split()]
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ['CHANNELS'].split()]
-auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
-AUTH_USERS = (auth_users + ADMINS) if auth_users else []
-auth_channel = environ.get('FORCES_SUB')
-AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else auth_channel
 AUTH_GROUPS = [int(admin) for admin in environ.get("AUTH_GROUPS", "").split()]
-TUTORIAL = "https://t.me/CME_Movie"
-# MongoDB information
-DATABASE_URI = environ['DATABASE_2']
-DATABASE_NAME = environ['BOT_NAME']
+auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
+
+
+# ==================================
+# Empty 😂
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
+CACHE_TIME = int(environ.get('CACHE_TIME', 300))
+USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', False))
+BUTTONS = {}
+CURRENT = int(environ.get("SKIP", 2))
+CANCEL = False
+FORCES_SUB = int(FORCE) if FORCE and id_pattern.search(FORCE) else FORCE
+DATABASE_NAME = environ.get("DATABASE_NAME", 'Rocky_autofilter_Robot')
+AUTH_USERS = (auth_users + ADMINS) if auth_users else []
+# ==================================
 
-# Messages
-default_start_msg = """
-**Hi, I'm Auto Filter V3**
+team_name = os.environ.get('team_name', 't.me/Kiccha_OTT')
+team_link = os.environ.get('team_link', 't.me/Kiccha_OTT')
 
-Here you can search files in Inline mode as well as PM, Use the below buttons to search files or send me the name of file to search.
-"""
-START_MSG = environ.get('START_MSG', default_start_msg)
+# ==================================
+# About Bot 🤖
+class bot_info(object):
+    BOT_NAME = None
+    BOT_USERNAME = None
+    BOT_ID = None
 
-FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "")
-OMDB_API_KEY = environ.get("OMDB_API_KEY", "http://www.omdbapi.com/?i=tt3896198&apikey=4f08a979")
-if FILE_CAPTION.strip() == "":
-    CUSTOM_FILE_CAPTION=None
-else:
-    CUSTOM_FILE_CAPTION=FILE_CAPTION
-if OMDB_API_KEY.strip() == "":
-    API_KEY=None
-else:
-    API_KEY=OMDB_API_KEY
