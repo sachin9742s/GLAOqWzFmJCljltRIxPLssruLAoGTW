@@ -1,67 +1,102 @@
 {
-    "name": "Der bot",
-    "description": "Hapere",
-    "logo": "",
+    "name": "Rocky_autofilter_Robot",
+    "description": "Super Fast Telegram Auto Filter Bot",
+    "logo": "https://te.legra.ph/file/b181e05df785a59803545.jpg",
+    "stack": "container",
     "keywords": [
-        "gehehsh"
+      "best",
+      "telegarm",
+      "auto",
+      "filter",
+      "bot"
     ],
-    "repository": "https://var.com/",
-    "success_url": "https://combat",
-    "stack": "heroku-20",
+    "website": "https://youtube.com/c/MoTech_YT",
+    "repository": "https://github.com/sachin9742s/Rocky_autofilter_Robot",
     "env": {
-        "API_ID": {
-            "description": "You api id, from my.telegram.org or @ScrapperRoBot.",
-            "value": "", 
-            "required": false
-        },
-        "API_HASH": {
-            "description": "You api hash, from my.telegram.org or @ScrapperRoBot.",
-            "value": "",
-            "required": false
-        },
-        "SESSION": {
-            "description": "Your session string. Can be added now, or after deploy. (The bot will NOT work without a session string!!)",
+        "BOT_TOKEN": {
+            "description": "Your Bot Token From https://youtu.be/cB4UduCcNWs",
             "value": ""
         },
-        "REDIS_URI": {
-            "description": "Redis endpoint URL, from redislabs.com",
+        "API_ID": {
+            "description": "Get this value from https://youtu.be/5eEsvLAKVc0 or @MT_MytelegramOrg_Bot",
+            "value": ""
+        },
+        "API_HASH": {
+            "description": "Get this value from https://youtu.be/5eEsvLAKVc0 or @MT_MytelegramOrg_Bot",
+            "value": ""
+        },
+        "CHANNELS": {
+            "description": "Username or ID of channel or group. Separate multiple IDs by space. @MT_ID_Bot",
+            "value": ""
+        },
+        "ADMINS": {
+            "description": "Username or ID of Admin. Separate multiple Admins by space.",
+            "value": ""
+        },
+        "AUTH_USERS": {
+            "description": "Username or ID of users to give access of inline search. Separate multiple users by space.\nLeave it empty if you don't want to restrict bot usage.",
             "value": "",
             "required": false
         },
-        "REDIS_PASSWORD": {
-            "description": "Redis endpoint password, from redislabs.com",
+        "FORCES_SUB": {
+            "description": "ID of channel.Make sure bot is admin in this channel. Without subscribing this channel users cannot use bot.",
             "value": "",
             "required": false
         },
-        "HEROKU_API": {
-            "description": "Heroku API token. Needed if deploying on heroku ONLY.",
+        "PICS": {
+            "description": "Add some telegraph link of pictures .",
+            "value": "",
+            "required": false
+        },
+        "START_MSG": {
+            "description": "Welcome message for start command More Information Check Readme.md",
+            "value": "",
+            "required": false
+        },
+        "AUTH_GROUPS": {
+            "description": "ID of groups which bot should work as autofilter, bot can only work in thease groups. If not given , bot can be used in any group.",
+            "value": "",
+            "required": false
+        },
+        "DATABASE_URI": {
+            "description": "Mongodb from https://youtu.be/gBLTsH-IXr0",
+            "value": ""
+        },
+        "SPELL_MODE": {
+            "description": "Spelling Mode on or off",
+            "value": "on",
+            "required": true
+        },
+        "SPELL_MODE_TEXT": {
+            "description": "Seplling Mode Text For More Info Check Readme.md",
             "value": "",
             "required": true
         },
-        "HEROKU_APP_NAME": {
-            "description": "Name of your heroku app, given in the first blank on this page. To be added if deploying to heroku ONLY.",
-            "value": "",
-            "required":  true
+        "LOG_CHANNEL": {
+            "description": "Log Channel Use Private Channel Id -100×××× from @MT_ID_Bot",
+            "value": ""
+        },
+        "DEV_NAME": {
+            "description": "Creator Name or Username ",
+            "value": "sachin_official_admin",
+            "required": true
+        },
+        "SUPPORT": {
+            "description": "Your Group Link Private or Public Link (with t.me or https://t.me)",
+            "value": "https://telegram.dog/Kiccharequest",
+            "required": true
         }
     },
+    "addons": [],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ],
     "formation": {
-      "worker": {
+        "worker": {
             "quantity": 1,
             "size": "free"
         }
-    },
-    "buildpacks": [
-    {
-        "url":"heroku/python"
-    },
-    {
-        "url":"heroku-community/apt"
-    },
-    {
-        "url":"https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-    },
-    {
-        "url":"https://github.com/stevo550/buildpack-slug-cleaner"
     }
-    ]
 }
