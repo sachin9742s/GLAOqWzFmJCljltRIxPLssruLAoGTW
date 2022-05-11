@@ -1,1 +1,1 @@
-worker: bash Rush.sh
+worker: python3 mt_botz.py
